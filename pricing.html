@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Open Sans", sans-serif;
+            text-decoration: none;
+            list-style: none;
+        }
+
+
+        nav ul li a:hover,
+        nav ul li.active a {
+            color: #5e97ff;
+        }
+
+        .auth-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .auth-links a {
+            color: #5e97ff;
+            text-decoration: none;
+            margin-left: 15px;
+            font-size: 16px;
+        }
+
+        .pricing-header {
+            text-align: center;
+            margin: 50px 0;
+        }
+
+        .pricing-header h1 {
+            font-size: 2.5em;
+        }
+
+        .pricing-header p {
+            font-size: 1.2em;
+        }
+
+        .pricing-table {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            flex: 1;
+            max-width: 320px;
+            background-color: #2d2d44;
+            margin: 20px;
+            text-align: center;
+            cursor: pointer;
+            overflow: hidden;
+            color: #ffffff;
+            transition: .3s linear;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .pricing-card-header {
+            background-color: #6c63ff;
+            color: #fff;
+            padding: 20px 0;
+            font-size: 1.5em;
+            font-weight: 700;
+            text-transform: uppercase;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .price {
+            font-size: 50px;
+            color: #6c63ff;
+            margin: 20px 0;
+        }
+
+        .price sup, .price span {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .pricing-card ul {
+            padding: 20px;
+            text-align: left;
+        }
+
+        .pricing-card li {
+            font-size: 16px;
+            padding: 10px 0;
+            text-transform: none;
+            border-top: 1px solid #404060;
+            display: flex;
+            align-items: center;
+        }
+
+        .pricing-card li:first-child {
+            border-top: none;
+        }
+
+        .pricing-card li::before {
+            content: '\2713'; /* Unicode character for checkmark */
+            color: #6c63ff;
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        .order-btn {
+            display: inline-block;
+            margin: 20px 0 40px;
+            border: 2px solid #6c63ff;
+            color: #6c63ff;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-transform: uppercase;
+            font-weight: 500;
+            transition: .3s linear;
+        }
+
+        .order-btn:hover {
+            background-color: #6c63ff;
+            color: #fff;
+        }
+
+        @media screen and (max-width: 768px) {
+            .pricing-card {
+                flex: 100%;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+            <div class="logo">
+                <img src="logo.png" alt="PayLo Logo">
+            </div>
+            <nav>
+                <ul class="nav nav-pills">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="features.html">Features</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li class="active"><a href="pricing.html">Pricing</a></li>
+                    <li><a href="contact.html">Support</a></li>
+                </ul>
+            </nav>
+            <div class="auth-links">
+                <a href="login.html">Login</a>
+                <a href="signup.html">Sign Up</a>
+            </div>
+    </header>
+
+    <div class="pricing-header">
+        <h1>Discover our PayLo plans! As affordable as it can get!</h1>
+    </div>
+
+    <div class="pricing-table">
+        <div class="pricing-card">
+            <h3 class="pricing-card-header">Basic Plan</h3>
+            <div class="price">Free</div>
+            <ul>
+                <li>Real-Time Invoice Management</li>
+                <li>10GB Storage for Financial Data</li>
+                <li>Basic Customer Support</li>
+                <li>Secure Transaction Records</li>
+                <li>Access to Unified Financial Dashboard</li>
+            </ul>
+            <a href="#" class="order-btn">Subscribe</a>
+        </div>
+
+        <div class="pricing-card">
+            <h3 class="pricing-card-header">Business Plan</h3>
+            <div class="price">$4.99<span> / monthly</span></div>
+            <ul>
+                <li>All features in Basic Plan</li>
+                <li>50 GB Financial Data Storage</li>
+                <li>Priority Customer Support</li>
+                <li>Smart Contracts for Automated Payments</li>
+                <li>Comprehensive Financial Analytics and Reporting</li>
+                <li>Integration with Multiple Bank Accounts</li>
+            </ul>
+            <a href="#" class="order-btn">Subscribe</a>
+        </div>
+
+        <div class="pricing-card">
+            <h3 class="pricing-card-header">Pro Plan</h3>
+            <div class="price">$19.99<span> / monthly</span></div>
+            <ul>
+                <li>All features from Business and Basic</li>
+                <li>Unlimited Storage</li>
+                <li>24/7 Premium Customer Support</li>
+                <li>Enhanced Security Features (Blockchain-based)</li>
+                <li>Advanced Cash Flow Forecasting</li>
+                <li>Personalized Financial Advice and Loan Options</li>
+            </ul>
+            <a href="#" class="order-btn">Subscribe</a>
+        </div>
+    </div>
+</body>
+</html>

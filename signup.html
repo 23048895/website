@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="index.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Open Sans", sans-serif;
+            text-decoration: none;
+            list-style: none;
+        }
+
+
+
+        nav ul li a:hover,
+        nav ul li.active a {
+            color: #5e97ff;
+        }
+
+        .auth-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .auth-links a {
+            color: #5e97ff;
+            text-decoration: none;
+            margin-left: 15px;
+            font-size: 16px;
+        }
+
+        .signup-header {
+            text-align: center;
+            margin-top: 150px;
+            margin-bottom: 50px;
+        }
+
+        .signup-header h1 {
+            font-size: 2.5em;
+        }
+
+        .signup-options {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .signup-card {
+            background-color: #2d2d44;
+            padding: 20px 40px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .signup-card:hover {
+            transform: scale(1.05);
+        }
+
+        .signup-card h2 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+
+        .btn-signup {
+            background-color: #6c63ff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+
+        .btn-signup:hover {
+            background-color: #9156ff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+            <div class="logo">
+                <img src="logo.png" alt="PayLo Logo">
+            </div>
+            <nav>
+                <ul class="nav nav-pills">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="features.html">Features</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="contact.html">Support</a></li>
+                </ul>
+            </nav>
+            <div class="auth-links">
+                <a href="login.html">Login</a>
+                <a href="signup.html">Sign Up</a>
+            </div>
+
+    </header>
+
+    <div class="signup-header">
+        <h1>Select what you are signing up as.</h1>
+    </div>
+
+    <div class="signup-options">
+        <div class="signup-card">
+            <h2>Individual</h2>
+            <a href="individual.html" class="btn btn-signup">Get Started</a>
+        </div>
+        <div class="signup-card">
+            <h2>SME Business</h2>
+            <a href="business.html" class="btn btn-signup">Get Started</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <script defer src="dashboard.js"></script>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Welcome back,<br>John Doe!</h2>
+        <p class="budget">$ 500.000<br>Monthly Budget</p>
+        <nav>
+            <ul>
+                <li class="active">Dashboard</li>
+                <li id="invoice-management">Invoice Management</li>
+                <li id="transaction">Transaction</li>
+                <li id="blockchain-ledger">Blockchain Ledger</li>
+                <li>Settings</li>
+                <li>Account</li>
+                <li>Log Out</li>
+                <li>Help & Information</li>
+                <li id="homepage">Back to homepage</li>
+            </ul>
+        </nav>
+    </div>
+    <div class="main-content">
+        <header>
+            <h1>Dashboard</h1>
+            <div class="header-icons">
+                <span class="icon">🔔</span>
+                <span class="icon">💬</span>
+                <span class="icon">🔍</span>
+                <span class="icon profile">👤</span>
+            </div>
+        </header>
+        <div class="cards">
+            <div class="card balance-card">
+                <h3>Available Balance</h3>
+                <p class="balance">$ 700.000</p>
+                <p class="card-number">Card Number: 123-456-7890</p>
+                <p>Payment via:</p>
+                <p class="bank">Credit Card</p>
+                <p>Bank:</p>
+                <p class="bank">Bank of America</p>
+            </div>
+            <div class="card bills-card">
+                <h3>ABC Company’s Bills</h3>
+                <ul>
+                    <li>Monthly Electricity</li>
+                    <span class="ongoing">Your next monthly payment is in 27 August.</span>
+                    <li>Monthly Internet</li>
+                    <span class="expiry">Expired in 1 Day</span>
+                </ul>
+            </div>
+            <div class="card income-card">
+                <h3>Revenue</h3>
+                <p class="income">+ $1.000</p>
+                <h3>Profit</h3>
+                <p class="income">+ $500</p>
+            </div>
+            <div class="card spending-card">
+                <h3>Spending</h3>
+                <p class="spending">- $500</p>
+            </div>
+        </div>
+
+        <br>
+        <button id="topup">Topup</button> 
+        <button id="withdraw">Withdraw</button>
+    </div>
+
+    <!-- Modal for Topup -->
+    <div id="topup-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form id="topup-form">
+                <label for="payment-type">Payment Type:</label>
+                <select id="payment-type" name="payment-type" required>
+                    <option value="credit-card">Credit/Debit Card</option>
+                    <option value="paypal">PayPal</option>
+                    <option value="bank-transfer">Bank Transfer</option>
+                </select>
+                <label for="amount">Amount:</label>
+                <input type="number" id="amount" name="amount" required>
+                <button type="submit">Proceed</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

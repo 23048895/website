@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Sign Up</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Open Sans", sans-serif;
+            text-decoration: none;
+            list-style: none;
+        }
+
+        nav ul li a:hover,
+        nav ul li.active a {
+            color: #5e97ff;
+        }
+
+        .auth-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .auth-links a {
+            color: #5e97ff;
+            text-decoration: none;
+            margin-left: 15px;
+            font-size: 16px;
+        }
+
+        .signup-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        .signup-container h1 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        .signup-form {
+            width: 100%;
+            max-width: 500px;
+            background-color: #2d2d44;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .signup-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .signup-form label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #b757f3;
+        }
+
+        .signup-form input,
+        .signup-form select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+
+        .signup-form input[type="file"] {
+            padding: 0;
+        }
+
+        .signup-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .signup-buttons button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        .btn-register {
+            background-color: #3366cc;
+            color: white;
+        }
+
+        .btn-register:hover {
+            background-color: #294e99;
+        }
+    </style>
+</head>
+<body>
+    <header>
+            <div class="logo">
+                <img src="logo.png" alt="PayLo Logo">
+            </div>
+            <nav>
+                <ul class="nav nav-pills">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="features.html">Features</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="contact.html">Support</a></li>
+                </ul>
+            </nav>
+            <div class="auth-links">
+                <a href="login.html">Login</a>
+                <a href="signup.html">Sign Up</a>
+            </div>
+    </header>
+
+    <div class="signup-container">
+        <h1>Business Sign Up</h1>
+        <form class="signup-form">
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" name="fullName" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="phoneNumber">Phone Number</label>
+                <input type="text" id="phoneNumber" name="phoneNumber" required>
+            </div>
+            <div class="form-group">
+                <label for="businessName">Business Name</label>
+                <input type="text" id="businessName" name="businessName" required>
+            </div>
+            <div class="form-group">
+                <label for="businessRegisterNumber">Business Register Number</label>
+                <input type="text" id="businessRegisterNumber" name="businessRegisterNumber" required>
+            </div>
+            <div class="form-group">
+                <label for="nric">NRIC (Please Upload Here)</label>
+                <input type="file" id="nric" name="nric" required>
+            </div>
+            <div class="form-group">
+                <label for="acraDocument">ACRA Registration Document</label>
+                <input type="file" id="acraDocument" name="acraDocument" required>
+            </div>
+            <div class="signup-buttons">
+                <button type="submit" class="btn-register">Register Business</button>
+            </div>
+            <div>
+                
+            </div>
+            <a href="signup.html">Back</a>
+        </form>
+    </div>
+</body>
+</html>

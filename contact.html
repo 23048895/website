@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url(background.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            color:white;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #121232;
+        }
+
+        header .logo img {
+            width: 100px;
+            height: auto;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: #c5c5c5;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        nav ul li a:hover,
+        nav ul li.active a {
+            color: #5e97ff;
+        }
+
+        .auth-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .auth-links a {
+            color: #5e97ff;
+            text-decoration: none;
+            margin-left: 15px;
+            font-size: 16px;
+        }
+
+        .contact-section {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 60px 20px;
+        }
+
+        .contact-info {
+            background-color: #2e2e3a;
+            padding: 40px;
+            border-radius: 10px;
+            max-width: 400px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .contact-info h2 {
+            color: #ff4fd8;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .contact-info p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .contact-info ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .contact-info ul li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .contact-info ul li i {
+            margin-right: 10px;
+        }
+
+        .contact-form {
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #2e2e3a;
+            color: #c5c5c5;
+        }
+
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: #7a7a7a;
+        }
+
+        .contact-form button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #5e97ff;
+            color: white;
+            font-size: 16px;
+        }
+
+        .chatbot-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #5e97ff;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="PayLo Logo">
+        </div>
+        <nav>
+            <ul class="nav nav-pills">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li class="active"><a href="contact.html">Support</a></li>
+            </ul>
+        </nav>
+        <div class="auth-links">
+            <a href="login.html">Login</a>
+            <a href="signup.html">Sign Up</a>
+        </div>
+    </header>
+
+    <div class="contact-section">
+        <div class="contact-info">
+            <h2>Get in touch.</h2>
+            <p>We’re here to help and answer any questions you might have. We will answer your inquiries in a maximum of 48 hours. Or you can try our 24/7 chatbot that is ready to deal with questions you possibly have!</p>
+            <ul>
+                <li><i class="fas fa-envelope"></i> hello@reallygreatsite.com</li>
+                <li><i class="fas fa-phone"></i> +123-456-7890</li>
+                <li><i class="fas fa-globe"></i> reallygreatsite.com</li>
+                <li><i class="fas fa-map-marker-alt"></i> 123 Anywhere St., Any City, ST 12345</li>
+            </ul>
+        </div>
+
+        <div class="contact-form">
+            <form>
+                <input type="text" placeholder="First Name*" required>
+                <input type="text" placeholder="Last Name*">
+                <input type="email" placeholder="Email*" required>
+                <input type="tel" placeholder="Phone Number">
+                <textarea placeholder="Message*" required></textarea>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <button class="chatbot-btn">Chat with the 24/7 Chatbot!</button>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>
