@@ -88,5 +88,18 @@
             </form>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const user = JSON.parse(sessionStorage.getItem('loggedInUser'));
+            if (user) {
+                document.getElementById('user-greeting').innerHTML = `Welcome back,<br>${user.fullName}!`;
+            }
+        });
+
+        function setLoggedIn() {
+            sessionStorage.setItem('isLoggedIn', 'true');
+        }
+    </script>
 </body>
 </html>

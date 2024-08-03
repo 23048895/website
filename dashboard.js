@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (item.id === 'blockchain-ledger') {
                 window.location.href = 'blockchain.html';
             } else if (item.id === 'homepage') {
-                window.location.href = 'dashboard.html';
+                window.location.href = 'index.html';
             }
         });
     });
