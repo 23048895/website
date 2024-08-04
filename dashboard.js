@@ -17,6 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.location.href = 'index.html';
             } else if (item.id === 'subscription') {
                 window.location.href = 'subscription.html';
+            } else if (item.id === 'account') {
+                window.location.href = 'account.html';
             }
         });
     });
