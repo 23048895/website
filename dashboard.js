@@ -15,6 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.location.href = 'blockchain.html';
             } else if (item.id === 'homepage') {
                 window.location.href = 'index.html';
+            } else if (item.id === 'subscription') {
+                window.location.href = 'subscription.html';
             }
         });
     });

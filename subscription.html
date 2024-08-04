@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <script defer src="dashboard.js"></script>
+</head>
+<body>
+    <div class="sidebar">
+        <h2 id="user-greeting"></h2>
+        <h2 id="companyName"></h2>
+        <p class="budget">$ 500.000<br>Monthly Budget</p>
+        <nav>
+            <ul>
+                <li onclick="window.location.href='dashboard.html'">Dashboard</li>
+                <li id="invoice-management">Invoice Management</li>
+                <li id="transaction">Transaction</li>
+                <li id="blockchain-ledger">Blockchain Ledger</li>
+                <li>Account</li>
+                <li class="active">Subscription</li>
+                <li>Help & Information</li>
+                <li id="homepage" onclick="logout()">Logout</li>
+            </ul>
+        </nav>
+    </div>
+    <div class="main-content">
+        <header>
+            <h1>Dashboard</h1>
+            <div class="header-icons">
+                <span class="icon">🔔</span>
+                <span class="icon">💬</span>
+                <span class="icon">🔍</span>
+                <span class="icon profile">👤</span>
+            </div>
+        </header>
+</body>
+</html>
