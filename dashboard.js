@@ -32,64 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.balance').textContent = `$ ${parseFloat(currentBalance).toLocaleString()}`;
     }
 
-    // Invoice management functionalities
-    if (document.getElementById('create-invoice')) {
-        const createInvoiceBtn = document.getElementById('create-invoice');
-        const updateInvoiceBtn = document.getElementById('update-invoice');
-        const modal = document.getElementById('invoice-modal');
-        const closeModal = document.getElementsByClassName('close')[0];
-        const form = document.getElementById('invoice-form');
-        const invoiceTableBody = document.getElementById('invoice-table-body');
-        let editingInvoice = null;
-
-        createInvoiceBtn.addEventListener('click', () => {
-            openModal(modal);
-        });
-
-        updateInvoiceBtn.addEventListener('click', () => {
-            const selectedInvoice = prompt('Enter the Invoice ID to update:');
-            if (selectedInvoice) {
-                const row = Array.from(invoiceTableBody.children).find(row => row.children[0].textContent === selectedInvoice);
-                if (row) {
-                    editingInvoice = row;
-                    populateForm(row, form);
-                    openModal(modal);
-                } else {
-                    alert('Invoice not found!');
-                }
-            }
-        });
-
-        closeModal.addEventListener('click', () => {
-            closeModalFunc(modal, form);
-        });
-
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                closeModalFunc(modal, form);
-            }
-        };
-
-        form.addEventListener('submit', (event) => {
-            event.preventDefault();
-            const formData = new FormData(form);
-            const invoiceData = {
-                id: formData.get('invoice-id'),
-                customer: formData.get('customer'),
-                date: formData.get('date'),
-                amount: formData.get('amount'),
-                status: formData.get('status')
-            };
-
-            if (editingInvoice) {
-                updateInvoice(editingInvoice, invoiceData);
-            } else {
-                addInvoice(invoiceData, invoiceTableBody);
-            }
-            closeModalFunc(modal, form);
-        });
-    }
-
     // Transaction management functionalities
     if (document.getElementById('create-transaction')) {
         const createTransactionBtn = document.getElementById('create-transaction');
@@ -107,10 +49,10 @@ document.addEventListener('DOMContentLoaded', () => {
         updateTransactionBtn.addEventListener('click', () => {
             const selectedTransaction = prompt('Enter the Transaction ID to update:');
             if (selectedTransaction) {
-                const card = Array.from(transactionContainer.children).find(card => card.querySelector('.transaction-id').textContent === selectedTransaction);
+                const card = Array.from(transactionContainer.children).find(card => card.dataset.transactionId === selectedTransaction);
                 if (card) {
                     editingTransaction = card;
-                    populateForm(card, form);
+                    populateTransactionForm(card, form);
                     openModal(modal);
                 } else {
                     alert('Transaction not found!');
@@ -143,6 +85,64 @@ document.addEventListener('DOMContentLoaded', () => {
                 updateTransaction(editingTransaction, transactionData);
             } else {
                 addTransaction(transactionData, transactionContainer);
+            }
+            closeModalFunc(modal, form);
+        });
+    }
+
+    // Invoice management functionalities
+    if (document.getElementById('create-invoice')) {
+        const createInvoiceBtn = document.getElementById('create-invoice');
+        const updateInvoiceBtn = document.getElementById('update-invoice');
+        const modal = document.getElementById('invoice-modal');
+        const closeModal = document.getElementsByClassName('close')[0];
+        const form = document.getElementById('invoice-form');
+        const invoiceTableBody = document.getElementById('invoice-table-body');
+        let editingInvoice = null;
+
+        createInvoiceBtn.addEventListener('click', () => {
+            openModal(modal);
+        });
+
+        updateInvoiceBtn.addEventListener('click', () => {
+            const selectedInvoice = prompt('Enter the Invoice ID to update:');
+            if (selectedInvoice) {
+                const row = Array.from(invoiceTableBody.children).find(row => row.children[0].textContent === selectedInvoice);
+                if (row) {
+                    editingInvoice = row;
+                    populateInvoiceForm(row, form);
+                    openModal(modal);
+                } else {
+                    alert('Invoice not found!');
+                }
+            }
+        });
+
+        closeModal.addEventListener('click', () => {
+            closeModalFunc(modal, form);
+        });
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModalFunc(modal, form);
+            }
+        };
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const formData = new FormData(form);
+            const invoiceData = {
+                id: formData.get('invoice-id'),
+                customer: formData.get('customer'),
+                date: formData.get('date'),
+                amount: formData.get('amount'),
+                status: formData.get('status')
+            };
+
+            if (editingInvoice) {
+                updateInvoice(editingInvoice, invoiceData);
+            } else {
+                addInvoice(invoiceData, invoiceTableBody);
             }
             closeModalFunc(modal, form);
         });
@@ -411,20 +411,22 @@ function openModal(modal) {
 function closeModalFunc(modal, form) {
     modal.style.display = "none";
     form.reset();
+    editingInvoice = null;
     editingTransaction = null;
 }
 
-function populateForm(item, form) {
-    form['transaction-id'].value = item.querySelector('.transaction-id') ? item.querySelector('.transaction-id').textContent : item.children[0].textContent;
-    form['description'].value = item.querySelector('.description') ? item.querySelector('.description').textContent : item.children[1].textContent;
-    form['date'].value = item.querySelector('.date') ? item.querySelector('.date').textContent : item.children[2].textContent;
-    form['amount'].value = item.querySelector('.amount') ? item.querySelector('.amount').textContent.replace('$', '') : item.children[3].textContent.replace('$', '');
-    form['status'].value = item.querySelector('.status') ? item.querySelector('.status').textContent : item.children[4].textContent;
+function populateTransactionForm(item, form) {
+    form['transaction-id'].value = item.dataset.transactionId;
+    form['description'].value = item.querySelector('.description').textContent;
+    form['date'].value = item.querySelector('.date').textContent;
+    form['amount'].value = item.querySelector('.amount').textContent.replace('$', '');
+    form['status'].value = item.querySelector('.status').textContent;
 }
 
 function addTransaction(transactionData, transactionContainer) {
     const newCard = document.createElement('div');
     newCard.classList.add('transaction-card');
+    newCard.dataset.transactionId = transactionData.id;
     newCard.innerHTML = `
         <div class="transaction-icon">💰</div>
         <div class="transaction-details">
@@ -438,9 +440,38 @@ function addTransaction(transactionData, transactionContainer) {
 }
 
 function updateTransaction(card, transactionData) {
+    card.dataset.transactionId = transactionData.id;
     card.querySelector('.amount').textContent = `$${transactionData.amount}`;
     card.querySelector('.description').textContent = transactionData.description;
     card.querySelector('.status').textContent = transactionData.status;
     card.querySelector('.status').className = `status ${transactionData.status.toLowerCase()}`;
     card.querySelector('.date').textContent = transactionData.date;
+}
+
+function populateInvoiceForm(row, form) {
+    form['invoice-id'].value = row.children[0].textContent;
+    form['customer'].value = row.children[1].textContent;
+    form['date'].value = row.children[2].textContent;
+    form['amount'].value = row.children[3].textContent.replace('$', '');
+    form['status'].value = row.children[4].textContent;
+}
+
+function addInvoice(invoiceData, invoiceTableBody) {
+    const newRow = document.createElement('tr');
+    newRow.innerHTML = `
+        <td>${invoiceData.id}</td>
+        <td>${invoiceData.customer}</td>
+        <td>${invoiceData.date}</td>
+        <td>$${invoiceData.amount}</td>
+        <td>${invoiceData.status}</td>
+    `;
+    invoiceTableBody.appendChild(newRow);
+}
+
+function updateInvoice(row, invoiceData) {
+    row.children[0].textContent = invoiceData.id;
+    row.children[1].textContent = invoiceData.customer;
+    row.children[2].textContent = invoiceData.date;
+    row.children[3].textContent = `$${invoiceData.amount}`;
+    row.children[4].textContent = invoiceData.status;
 }
