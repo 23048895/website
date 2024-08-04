@@ -38,7 +38,7 @@
         <div class="cards">
             <div class="card balance-card">
                 <h3>Available Balance</h3>
-                <p class="balance">$ 700.000</p>
+                <p class="balance"></p>
                 <p class="card-number">Card Number: 123-456-7890</p>
                 <p>Payment via:</p>
                 <p class="bank">Credit Card</p>
@@ -68,7 +68,7 @@
 
         <br>
         <button id="topup">Topup</button> 
-        <button id="withdraw">Withdraw</button>
+        <button id="withdraw">Withdraw/Transfer</button>
     </div>
 
     <!-- Modal for Topup -->
@@ -89,14 +89,30 @@
         </div>
     </div>
 
-    <!-- Modal for Withdraw -->
+    <!-- Modal for Withdraw/Transfer -->
     <div id="withdraw-modal" class="modal">
         <div class="modal-content">
             <span class="close withdraw-close">&times;</span>
             <form id="withdraw-form">
-                <label for="withdraw-amount">Amount:</label>
-                <input type="number" id="withdraw-amount" name="withdraw-amount" required>
-                <button type="submit">Withdraw</button>
+                <label for="transaction-type">Transaction Type:</label>
+                <select id="transaction-type" name="transaction-type" required>
+                    <option value="withdraw">Withdraw</option>
+                    <option value="transfer">Transfer</option>
+                </select>
+                <div id="withdraw-options" style="display: none;">
+                    <label for="withdraw-method">Withdraw Method:</label>
+                    <select id="withdraw-method" name="withdraw-method" required>
+                        <option value="bank">Transfer to Bank</option>
+                        <option value="paynow">PayNow</option>
+                    </select>
+                </div>
+                <div id="transfer-options" style="display: none;">
+                    <label for="paynow-number">PayNow Number:</label>
+                    <input type="text" id="paynow-number" name="paynow-number">
+                </div>
+                <label for="transaction-amount">Amount:</label>
+                <input type="number" id="transaction-amount" name="transaction-amount" required>
+                <button type="submit">Confirm</button>
             </form>
         </div>
     </div>

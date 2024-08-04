@@ -1,5 +1,3 @@
-// dashboard.js
-
 document.addEventListener('DOMContentLoaded', () => {
     console.log("Dashboard JS Loaded");
 
@@ -22,11 +20,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Update balance if new balance exists in localStorage
-    const newBalance = localStorage.getItem('newBalance');
-    if (newBalance && document.querySelector('.balance')) {
-        console.log("New balance found in localStorage:", newBalance);
-        document.querySelector('.balance').textContent = `$ ${parseFloat(newBalance).toLocaleString()}`;
-        localStorage.removeItem('newBalance');  // Clear the temporary balance after updating
+    const currentBalance = localStorage.getItem('currentBalance');
+    if (currentBalance && document.querySelector('.balance')) {
+        console.log("Current balance found in localStorage:", currentBalance);
+        document.querySelector('.balance').textContent = `$ ${parseFloat(currentBalance).toLocaleString()}`;
     }
 
     // Invoice management functionalities
@@ -289,10 +286,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Withdraw functionality
+    // Withdraw/Transfer functionality
     const withdrawBtn = document.getElementById('withdraw');
     const withdrawModal = document.getElementById('withdraw-modal');
-    const closeWithdrawModal = document.getElementsByClassName('withdraw-close')[0];
+    const withdrawClose = document.getElementsByClassName('withdraw-close')[0];
     const withdrawForm = document.getElementById('withdraw-form');
 
     if (withdrawBtn) {
@@ -300,7 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
             withdrawModal.style.display = "block";
         });
 
-        closeWithdrawModal.addEventListener('click', () => {
+        withdrawClose.addEventListener('click', () => {
             withdrawModal.style.display = "none";
         });
 
@@ -312,18 +309,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
         withdrawForm.addEventListener('submit', (event) => {
             event.preventDefault();
-            const amount = document.getElementById('withdraw-amount').value;
-            const currentBalance = parseFloat(localStorage.getItem('currentBalance') || '700000');
-            const newBalance = currentBalance - parseFloat(amount);
-            if (newBalance >= 0) {
-                console.log("New Balance to be set after withdrawal:", newBalance);
-                localStorage.setItem('newBalance', newBalance);
-                localStorage.setItem('currentBalance', newBalance);
-                alert(`Withdrawal of $${amount} was successful!`);
-                withdrawModal.style.display = "none";
-                location.reload();
-            } else {
-                alert("Insufficient balance for this withdrawal.");
+            const transactionType = document.getElementById('transaction-type').value;
+            const amount = document.getElementById('transaction-amount').value;
+            const currentBalance = parseFloat(localStorage.getItem('currentBalance'));
+
+            if (transactionType === 'withdraw') {
+                const withdrawMethod = document.getElementById('withdraw-method').value;
+                if (currentBalance >= parseFloat(amount)) {
+                    localStorage.setItem('withdrawMethod', withdrawMethod);
+                    localStorage.setItem('transactionAmount', amount);
+                    localStorage.setItem('newBalance', currentBalance - parseFloat(amount));
+                    localStorage.setItem('currentBalance', currentBalance - parseFloat(amount));
+                    window.location.href = 'withdrawal.html';
+                } else {
+                    alert("Insufficient balance for withdrawal.");
+                }
+            } else if (transactionType === 'transfer') {
+                const paynowNumber = document.getElementById('paynow-number').value;
+                if (currentBalance >= parseFloat(amount)) {
+                    localStorage.setItem('paynowNumber', paynowNumber);
+                    localStorage.setItem('transactionAmount', amount);
+                    localStorage.setItem('newBalance', currentBalance - parseFloat(amount));
+                    localStorage.setItem('currentBalance', currentBalance - parseFloat(amount));
+                    window.location.href = 'successtransfer.html';
+                } else {
+                    alert("Insufficient balance for transfer.");
+                }
+            }
+        });
+
+        // Show/hide options based on transaction type
+        const transactionTypeSelect = document.getElementById('transaction-type');
+        transactionTypeSelect.addEventListener('change', (event) => {
+            if (event.target.value === 'withdraw') {
+                document.getElementById('withdraw-options').style.display = 'block';
+                document.getElementById('transfer-options').style.display = 'none';
+            } else if (event.target.value === 'transfer') {
+                document.getElementById('withdraw-options').style.display = 'none';
+                document.getElementById('transfer-options').style.display = 'block';
             }
         });
     }

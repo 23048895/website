@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Withdraw</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <script defer src="dashboard.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Withdraw Money</h1>
+        <form id="withdrawal-form">
+            <label for="bank-name">Bank Name:</label>
+            <input type="text" id="bank-name" name="bank-name" required>
+            <label for="bank-account">Bank Account Number:</label>
+            <input type="text" id="bank-account" name="bank-account" required>
+            <label for="account-holder">Account Holder Name:</label>
+            <input type="text" id="account-holder" name="account-holder" required>
+            <button type="submit">Confirm</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('withdrawal-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            window.location.href = 'successwithdrawal.html';
+        });
+    </script>
+</body>
+</html>
