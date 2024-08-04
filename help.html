@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help & Information</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <script defer src="dashboard.js"></script>
+    <style>
+        .help-content {
+            margin: 20px;
+        }
+
+        .faq {
+            margin-bottom: 30px;
+        }
+
+        .faq h2 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .faq ul {
+            list-style: none;
+        }
+
+        .faq li {
+            margin-bottom: 10px;
+        }
+
+        .faq li span {
+            font-weight: bold;
+        }
+
+        .chat-popup {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            right: 15px;
+            border: 3px solid #f1f1f1;
+            z-index: 9;
+        }
+
+        .chat-container {
+            max-width: 300px;
+            padding: 10px;
+            background-color: white;
+        }
+
+        .chat-container textarea {
+            width: 100%;
+            padding: 15px;
+            margin: 5px 0 22px 0;
+            border: none;
+            background: #f1f1f1;
+            resize: none;
+            min-height: 200px;
+        }
+
+        .chat-container textarea:focus {
+            background-color: #ddd;
+            outline: none;
+        }
+
+        .chat-container .btn {
+            background-color: #04AA6D;
+            color: white;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.8;
+        }
+
+        .chat-container .cancel {
+            background-color: red;
+        }
+
+        .chat-container .btn:hover, .open-button:hover {
+            opacity: 1;
+        }
+
+        .open-button {
+            background-color: #04AA6D;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            opacity: 0.8;
+            position: fixed;
+            bottom: 23px;
+            right: 28px;
+            width: 280px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2 id="user-greeting"></h2>
+        <h2 id="companyName"></h2>
+        <p class="budget">$ 500.000<br>Monthly Budget</p>
+        <nav>
+            <ul>
+                <li onclick="window.location.href='dashboard.html'">Dashboard</li>
+                <li id="invoice-management">Invoice Management</li>
+                <li id="transaction">Transaction</li>
+                <li id="blockchain-ledger">Blockchain Ledger</li>
+                <li id="account">Account</li>
+                <li id="subscription">Subscription</li>
+                <li class="active">Help & Information</li>
+                <li id="homepage" onclick="logout()">Logout</li>
+            </ul>
+        </nav>
+    </div>
+    <div class="main-content">
+        <header>
+            <h1>Help & Information</h1>
+            <div class="header-icons">
+                <span class="icon">🔔</span>
+                <span class="icon">💬</span>
+                <span class="icon">🔍</span>
+                <span class="icon profile">👤</span>
+            </div>
+        </header>
+        <div class="help-content">
+            <div class="faq">
+                <h2>Common Issues</h2>
+                <ul>
+                    <li><span>Issue 1:</span> How to reset my password?<br>Solution: Go to the Account page and click on "Reset Password".</li>
+                    <li><span>Issue 2:</span> How to contact customer support?<br>Solution: Use the chat popup below or email us at support@example.com.</li>
+                    <li><span>Issue 3:</span> How to upgrade my subscription?<br>Solution: Go to the Subscription page and select the desired plan.</li>
+                    <li><span>Issue 4:</span> How to view my transaction history?<br>Solution: Go to the Transaction page to see your transaction history.</li>
+                </ul>
+            </div>
+            <button class="open-button" onclick="openForm()">Talk to Customer Service</button>
+        </div>
+    </div>
+
+    <div class="chat-popup" id="myForm">
+        <div class="chat-container">
+            <h1>Customer Service</h1>
+            <textarea placeholder="Type your message.." name="msg" required></textarea>
+            <button class="btn" onclick="sendMessage()">Send</button>
+            <button class="btn cancel" onclick="closeForm()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const user = JSON.parse(sessionStorage.getItem('loggedInUser'));
+            if (user) {
+                document.getElementById('user-greeting').innerHTML = `Welcome back,<br>${user.fullName}!`;
+                document.getElementById('companyName').innerHTML = `Company:<br>${user.companyName}`;
+            }
+        });
+
+        function openForm() {
+            document.getElementById("myForm").style.display = "block";
+        }
+
+        function closeForm() {
+            document.getElementById("myForm").style.display = "none";
+        }
+
+        function sendMessage() {
+            const message = document.querySelector('.chat-container textarea').value;
+            if (message.trim() !== "") {
+                alert('Your message has been sent!');
+                document.querySelector('.chat-container textarea').value = '';
+                closeForm();
+            }
+        }
+
+        function logout() {
+            sessionStorage.removeItem('loggedInUser');
+            sessionStorage.removeItem('isLoggedIn');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
