@@ -289,6 +289,45 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Withdraw functionality
+    const withdrawBtn = document.getElementById('withdraw');
+    const withdrawModal = document.getElementById('withdraw-modal');
+    const closeWithdrawModal = document.getElementsByClassName('withdraw-close')[0];
+    const withdrawForm = document.getElementById('withdraw-form');
+
+    if (withdrawBtn) {
+        withdrawBtn.addEventListener('click', () => {
+            withdrawModal.style.display = "block";
+        });
+
+        closeWithdrawModal.addEventListener('click', () => {
+            withdrawModal.style.display = "none";
+        });
+
+        window.onclick = function(event) {
+            if (event.target == withdrawModal) {
+                withdrawModal.style.display = "none";
+            }
+        };
+
+        withdrawForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const amount = document.getElementById('withdraw-amount').value;
+            const currentBalance = parseFloat(localStorage.getItem('currentBalance') || '700000');
+            const newBalance = currentBalance - parseFloat(amount);
+            if (newBalance >= 0) {
+                console.log("New Balance to be set after withdrawal:", newBalance);
+                localStorage.setItem('newBalance', newBalance);
+                localStorage.setItem('currentBalance', newBalance);
+                alert(`Withdrawal of $${amount} was successful!`);
+                withdrawModal.style.display = "none";
+                location.reload();
+            } else {
+                alert("Insufficient balance for this withdrawal.");
+            }
+        });
+    }
+
     // Payment functionality
     const paymentForm = document.getElementById('payment-form');
     if (paymentForm) {
