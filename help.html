@@ -37,52 +37,75 @@
             position: fixed;
             bottom: 0;
             right: 15px;
-            border: 3px solid #f1f1f1;
+            width: 300px;
+            max-width: 90%;
+            border: 1px solid #ccc;
+            border-radius: 10px 10px 0 0;
             z-index: 9;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
 
-        .chat-container {
-            max-width: 300px;
+        .chat-header {
             padding: 10px;
-            background-color: white;
-        }
-
-        .chat-container textarea {
-            width: 100%;
-            padding: 15px;
-            margin: 5px 0 22px 0;
-            border: none;
-            background: #f1f1f1;
-            resize: none;
-            min-height: 200px;
-        }
-
-        .chat-container textarea:focus {
-            background-color: #ddd;
-            outline: none;
-        }
-
-        .chat-container .btn {
-            background-color: #04AA6D;
+            background-color: #4CAF50;
             color: white;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .chat-body {
             padding: 10px;
-            margin: 10px 0;
+            height: 300px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-message {
+            margin: 5px 0;
+        }
+
+        .chat-message.customer {
+            align-self: flex-end;
+            background-color: #b1f57e;
+            padding: 5px 10px;
+            border-radius: 10px;
+        }
+
+        .chat-message.support {
+            align-self: flex-start;
+            background-color: green;
+            padding: 5px 10px;
+            border-radius: 10px;
+        }
+
+        .chat-footer {
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            border-top: 1px solid #ccc;
+        }
+
+        .chat-footer input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .chat-footer button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
             border: none;
+            border-radius: 5px;
             cursor: pointer;
-            width: 100%;
-            opacity: 0.8;
-        }
-
-        .chat-container .cancel {
-            background-color: red;
-        }
-
-        .chat-container .btn:hover, .open-button:hover {
-            opacity: 1;
         }
 
         .open-button {
-            background-color: #04AA6D;
+            background-color: #4CAF50;
             color: white;
             padding: 10px;
             border: none;
@@ -92,6 +115,11 @@
             bottom: 23px;
             right: 28px;
             width: 280px;
+            border-radius: 10px;
+        }
+
+        .open-button:hover {
+            opacity: 1;
         }
     </style>
 </head>
@@ -138,11 +166,13 @@
     </div>
 
     <div class="chat-popup" id="myForm">
-        <div class="chat-container">
-            <h1>Customer Service</h1>
-            <textarea placeholder="Type your message.." name="msg" required></textarea>
-            <button class="btn" onclick="sendMessage()">Send</button>
-            <button class="btn cancel" onclick="closeForm()">Close</button>
+        <div class="chat-header">Customer Service</div>
+        <div class="chat-body" id="chatBody">
+            <!-- Messages will be appended here -->
+        </div>
+        <div class="chat-footer">
+            <input type="text" id="chatInput" placeholder="Type your message..." required>
+            <button onclick="sendMessage()">Send</button>
         </div>
     </div>
 
@@ -164,11 +194,26 @@
         }
 
         function sendMessage() {
-            const message = document.querySelector('.chat-container textarea').value;
-            if (message.trim() !== "") {
-                alert('Your message has been sent!');
-                document.querySelector('.chat-container textarea').value = '';
-                closeForm();
+            const chatInput = document.getElementById('chatInput');
+            const message = chatInput.value.trim();
+            if (message) {
+                const chatBody = document.getElementById('chatBody');
+                const customerMessage = document.createElement('div');
+                customerMessage.classList.add('chat-message', 'customer');
+                customerMessage.innerText = message;
+                chatBody.appendChild(customerMessage);
+
+                // Simulate a response from customer support
+                setTimeout(() => {
+                    const supportMessage = document.createElement('div');
+                    supportMessage.classList.add('chat-message', 'support');
+                    supportMessage.innerText = 'Support: Thank you for your message. We will get back to you shortly.';
+                    chatBody.appendChild(supportMessage);
+                    chatBody.scrollTop = chatBody.scrollHeight; // Scroll to the bottom
+                }, 1000);
+
+                chatInput.value = '';
+                chatBody.scrollTop = chatBody.scrollHeight; // Scroll to the bottom
             }
         }
 
