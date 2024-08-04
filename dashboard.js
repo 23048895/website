@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Update balance if new balance exists in localStorage
-    const currentBalance = localStorage.getItem('currentBalance');
+    const currentBalance = parseFloat(localStorage.getItem('currentBalance')) || 700000;
     if (currentBalance && document.querySelector('.balance')) {
         console.log("Current balance found in localStorage:", currentBalance);
         document.querySelector('.balance').textContent = `$ ${parseFloat(currentBalance).toLocaleString()}`;
