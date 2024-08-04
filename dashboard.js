@@ -2,7 +2,6 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     console.log("Dashboard JS Loaded");
-    
 
     // Sidebar navigation
     const menuItems = document.querySelectorAll('.sidebar nav ul li');
@@ -41,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let editingInvoice = null;
 
         createInvoiceBtn.addEventListener('click', () => {
-            openModal();
+            openModal(modal);
         });
 
         updateInvoiceBtn.addEventListener('click', () => {
@@ -50,8 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const row = Array.from(invoiceTableBody.children).find(row => row.children[0].textContent === selectedInvoice);
                 if (row) {
                     editingInvoice = row;
-                    populateForm(row);
-                    openModal();
+                    populateForm(row, form);
+                    openModal(modal);
                 } else {
                     alert('Invoice not found!');
                 }
@@ -59,12 +58,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         closeModal.addEventListener('click', () => {
-            closeModalFunc();
+            closeModalFunc(modal, form);
         });
 
         window.onclick = function(event) {
             if (event.target == modal) {
-                closeModalFunc();
+                closeModalFunc(modal, form);
             }
         };
 
@@ -82,48 +81,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (editingInvoice) {
                 updateInvoice(editingInvoice, invoiceData);
             } else {
-                addInvoice(invoiceData);
+                addInvoice(invoiceData, invoiceTableBody);
             }
-            closeModalFunc();
+            closeModalFunc(modal, form);
         });
-
-        function openModal() {
-            modal.style.display = "block";
-        }
-
-        function closeModalFunc() {
-            modal.style.display = "none";
-            form.reset();
-            editingInvoice = null;
-        }
-
-        function populateForm(row) {
-            form['invoice-id'].value = row.children[0].textContent;
-            form['customer'].value = row.children[1].textContent;
-            form['date'].value = row.children[2].textContent;
-            form['amount'].value = row.children[3].textContent.replace('$', '');
-            form['status'].value = row.children[4].textContent;
-        }
-
-        function addInvoice(invoiceData) {
-            const newRow = document.createElement('tr');
-            newRow.innerHTML = `
-                <td>${invoiceData.id}</td>
-                <td>${invoiceData.customer}</td>
-                <td>${invoiceData.date}</td>
-                <td>$${invoiceData.amount}</td>
-                <td>${invoiceData.status}</td>
-            `;
-            invoiceTableBody.appendChild(newRow);
-        }
-
-        function updateInvoice(row, invoiceData) {
-            row.children[0].textContent = invoiceData.id;
-            row.children[1].textContent = invoiceData.customer;
-            row.children[2].textContent = invoiceData.date;
-            row.children[3].textContent = `$${invoiceData.amount}`;
-            row.children[4].textContent = invoiceData.status;
-        }
     }
 
     // Transaction management functionalities
@@ -137,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let editingTransaction = null;
 
         createTransactionBtn.addEventListener('click', () => {
-            openModal();
+            openModal(modal);
         });
 
         updateTransactionBtn.addEventListener('click', () => {
@@ -146,8 +107,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const card = Array.from(transactionContainer.children).find(card => card.querySelector('.transaction-id').textContent === selectedTransaction);
                 if (card) {
                     editingTransaction = card;
-                    populateForm(card);
-                    openModal();
+                    populateForm(card, form);
+                    openModal(modal);
                 } else {
                     alert('Transaction not found!');
                 }
@@ -155,12 +116,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         closeModal.addEventListener('click', () => {
-            closeModalFunc();
+            closeModalFunc(modal, form);
         });
 
         window.onclick = function(event) {
             if (event.target == modal) {
-                closeModalFunc();
+                closeModalFunc(modal, form);
             }
         };
 
@@ -178,51 +139,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (editingTransaction) {
                 updateTransaction(editingTransaction, transactionData);
             } else {
-                addTransaction(transactionData);
+                addTransaction(transactionData, transactionContainer);
             }
-            closeModalFunc();
+            closeModalFunc(modal, form);
         });
-
-        function openModal() {
-            modal.style.display = "block";
-        }
-
-        function closeModalFunc() {
-            modal.style.display = "none";
-            form.reset();
-            editingTransaction = null;
-        }
-
-        function populateForm(card) {
-            form['transaction-id'].value = card.querySelector('.transaction-id').textContent;
-            form['description'].value = card.querySelector('.description').textContent;
-            form['date'].value = card.querySelector('.date').textContent;
-            form['amount'].value = card.querySelector('.amount').textContent.replace('$', '');
-            form['status'].value = card.querySelector('.status').textContent;
-        }
-
-        function addTransaction(transactionData) {
-            const newCard = document.createElement('div');
-            newCard.classList.add('transaction-card');
-            newCard.innerHTML = `
-                <div class="transaction-icon">💰</div>
-                <div class="transaction-details">
-                    <p class="amount">$${transactionData.amount}</p>
-                    <p class="description">${transactionData.description}</p>
-                    <p class="status ${transactionData.status.toLowerCase()}">${transactionData.status}</p>
-                    <p class="date">${transactionData.date}</p>
-                </div>
-            `;
-            transactionContainer.appendChild(newCard);
-        }
-
-        function updateTransaction(card, transactionData) {
-            card.querySelector('.amount').textContent = `$${transactionData.amount}`;
-            card.querySelector('.description').textContent = transactionData.description;
-            card.querySelector('.status').textContent = transactionData.status;
-            card.querySelector('.status').className = `status ${transactionData.status.toLowerCase()}`;
-            card.querySelector('.date').textContent = transactionData.date;
-        }
     }
 
     // Blockchain functionalities
@@ -404,7 +324,8 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', () => {
     const user = JSON.parse(sessionStorage.getItem('loggedInUser'));
     if (user) {
-        document.getElementById('user-greeting').innerHTML = `Welcome back,<br>${user.fullName}!`;
+        document.getElementById('user-greeting').innerHTML = `Welcome back,<br>${user.fullName}!`
+        document.getElementById('companyName').innerHTML = `Company:<br>${user.companyName}`;
     }
 });
 
@@ -412,4 +333,46 @@ function logout() {
     sessionStorage.removeItem('loggedInUser');
     sessionStorage.removeItem('isLoggedIn');
     window.location.href = 'index.html';
+}
+
+// Helper functions for modal and form handling
+function openModal(modal) {
+    modal.style.display = "block";
+}
+
+function closeModalFunc(modal, form) {
+    modal.style.display = "none";
+    form.reset();
+    editingTransaction = null;
+}
+
+function populateForm(item, form) {
+    form['transaction-id'].value = item.querySelector('.transaction-id') ? item.querySelector('.transaction-id').textContent : item.children[0].textContent;
+    form['description'].value = item.querySelector('.description') ? item.querySelector('.description').textContent : item.children[1].textContent;
+    form['date'].value = item.querySelector('.date') ? item.querySelector('.date').textContent : item.children[2].textContent;
+    form['amount'].value = item.querySelector('.amount') ? item.querySelector('.amount').textContent.replace('$', '') : item.children[3].textContent.replace('$', '');
+    form['status'].value = item.querySelector('.status') ? item.querySelector('.status').textContent : item.children[4].textContent;
+}
+
+function addTransaction(transactionData, transactionContainer) {
+    const newCard = document.createElement('div');
+    newCard.classList.add('transaction-card');
+    newCard.innerHTML = `
+        <div class="transaction-icon">💰</div>
+        <div class="transaction-details">
+            <p class="amount">$${transactionData.amount}</p>
+            <p class="description">${transactionData.description}</p>
+            <p class="status ${transactionData.status.toLowerCase()}">${transactionData.status}</p>
+            <p class="date">${transactionData.date}</p>
+        </div>
+    `;
+    transactionContainer.appendChild(newCard);
+}
+
+function updateTransaction(card, transactionData) {
+    card.querySelector('.amount').textContent = `$${transactionData.amount}`;
+    card.querySelector('.description').textContent = transactionData.description;
+    card.querySelector('.status').textContent = transactionData.status;
+    card.querySelector('.status').className = `status ${transactionData.status.toLowerCase()}`;
+    card.querySelector('.date').textContent = transactionData.date;
 }
