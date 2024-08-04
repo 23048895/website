@@ -250,14 +250,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 Blockchain Hash: ${block.hash}
             `);
         }
-
-        function applyFilters() {
-            // Implement filter logic here
-        }
-
-        function exportTransactions() {
-            // Implement export logic here
-        }
     }
 
     // Topup functionality
