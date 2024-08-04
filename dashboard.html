@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="sidebar">
-        <h2 id="user-greeting">Welcome back,<br>John Doe!</h2>
+        <h2 id="user-greeting">Welcome back,</h2>
         <p class="budget">$ 500.000<br>Monthly Budget</p>
         <nav>
             <ul>
@@ -88,19 +88,6 @@
         </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const user = JSON.parse(sessionStorage.getItem('loggedInUser'));
-            if (user) {
-                document.getElementById('user-greeting').innerHTML = `Welcome back,<br>${user.fullName}!`;
-            }
-        });
 
-        function logout() {
-            sessionStorage.removeItem('loggedInUser');
-            sessionStorage.removeItem('isLoggedIn');
-            window.location.href = 'index.html';
-        }
-    </script>
 </body>
 </html>

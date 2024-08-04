@@ -2,6 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     console.log("Dashboard JS Loaded");
+    
 
     // Sidebar navigation
     const menuItems = document.querySelectorAll('.sidebar nav ul li');
@@ -399,3 +400,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const user = JSON.parse(sessionStorage.getItem('loggedInUser'));
+    if (user) {
+        document.getElementById('user-greeting').innerHTML = `Welcome back,<br>${user.fullName}!`;
+    }
+});
+
+function logout() {
+    sessionStorage.removeItem('loggedInUser');
+    sessionStorage.removeItem('isLoggedIn');
+    window.location.href = 'index.html';
+}
